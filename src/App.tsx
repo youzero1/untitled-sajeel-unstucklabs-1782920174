@@ -1,15 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '@/contexts/AuthContext';
+import LoginPage from '@/pages/LoginPage';
+import DashboardPage from '@/pages/DashboardPage';
+import AuthCallbackPage from '@/pages/AuthCallbackPage';
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={
-          <div className="min-h-screen flex items-center justify-center bg-gray-950 text-white">
-            <p className="text-gray-400">OAuth App loading…</p>
-          </div>
-        } />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/auth/callback" element={<AuthCallbackPage />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
